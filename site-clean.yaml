@@ -1,0 +1,31 @@
+---
+
+- hosts: web_servers
+  become: true
+  tasks:
+    - name: remove apache2 and php packages
+      tags: apache, php
+      apt:
+        name:
+          - apache2
+          - libapache2-mod-php
+        state: absent
+
+- hosts: db_servers
+  become: true
+  tasks:
+    - name: remove mariadb package
+      tags: db, mariadb, mysql
+      apt:
+        name: mariadb-server
+        state: absent
+
+- hosts: file_servers
+  become: true
+  tasks:
+    - name: remove samba package
+      tags: fs, samba
+      apt:
+        name: samba
+        state: absent
+     
